@@ -1,0 +1,140 @@
+{% extends "account/base.html" %}
+
+{% block title %}ProtonPayer - Home{% endblock %}
+
+{% block nav_bar %}
+	{% if not request.user.is_authenticated %}
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>                        
+		      </button>
+		      <a class="navbar-brand" href="{% url "account:home" %}">Proton Payer</a>
+		    </div>
+
+		    <ul class="nav navbar-top-links navbar-left" style="padding-left: 0px; margin-left: 0px;">
+                <li class="dropdown home" style="padding-left: 0px; margin-left: 0px;">
+                    <a href="{% url 'account:feedback' %}" style="padding-left: 0px; margin-left: 0px;"><span class="fa fa-envelope fa-fw"></span> Send FeedBack</a>
+                </li>
+            </ul>
+
+		    <div class="collapse navbar-collapse" id="myNavbar">
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="{% url "account:register" %}"><span class="fa fa-user fa-fw"></span> Sign Up</a></li>
+		        <li><a href="{% url "account:login" %}"><span class="fa fa-sign-in fa-fw"></span> Login</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		</nav>
+	{% else %}
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>                        
+		      </button>
+		      <a class="navbar-brand" href="{% url "account:home" %}">Proton Payer</a>
+		    </div>
+
+		    <ul class="nav navbar-top-links navbar-left" style="padding-left: 0px; margin-left: 0px;">
+                <li class="dropdown home" style="padding-left: 0px; margin-left: 0px;">
+                    <a href="{% url 'account:feedback' %}" style="padding-left: 0px; margin-left: 0px;"><span class="fa fa-envelope fa-fw"></span> Send FeedBack</a>
+                </li>
+                <li class="dropdown home">
+			        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-left: 0px; margin-left: 0px;"><span class="fa fa-user fa-fw"></span> {{ request.user }}<span class="caret"></span></a>
+			        <ul class="dropdown-menu navbar-top-links">
+			          <li><a href="{% url 'account:profile' %}"><i class="fa fa-user fa-fw"></i> My Profile</a></li>
+			          <li><a href="{% url 'account:password_change' %}"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+			          <li class="divider"></li>
+			          <li><a href="{% url 'account:logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+			        </ul>
+			    </li>
+            </ul>
+
+		    <div class="collapse navbar-collapse" id="myNavbar">
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="{% url "account:dashboard" %}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+		        <li><a href="{% url "account:login" %}"><i class="fa fa-upload fa-fw"></i> Send Cash</a></li>
+		        <li><a href="{% url "account:register" %}"><i class="fa fa-download fa-fw"></i> Recieve Cash</a></li>
+		        <li><a href="{% url "account:login" %}"><i class="fa fa-history fa-fw"></i> Account Summary</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		</nav>
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="panel panel-default panel-info">
+	<div class="panel-heading">
+		<span class="fa fa-info fa-fw"></span> How it Works
+	</div>
+    <div class="panel-body">
+    	<h5 class="lead">Before you register on this platform, you must be ready to send at least N10, 000 within 12hrs to the person you will be matched with.</h5>
+    	<p>✔Get registered today,<!-- activate your account by following the instruction sent to your e-mail. (Check your main inbox folder, spam folder or junk folder for the mail.)-->
+		</p>
+		<p>✔Login to your account, then you will see who have been linked to send N10, 000 to.</p>
+		<p>✔Send your payment to the member within 48hrs, else your account will be banned from the program.</p>
+		<p>✔When your payment is confirmed by the member, you will be placed in the Receive List for you to be linked to two members who will Send Payment of N10, 000 each to you... that's N20, 000 total!</p>
+		<p>✔When you have received your complete payment, you will then be linked to whom you will pay N10, 000 for the next doubling to receive another N20, 000.
+		</p>
+		<p>…and the doubling process continues allowing you to make unlimited residual income.</p>
+		</br>
+
+		<h5 class="lead">Features of the System:</h5>
+		<p>♻Member to member payment,</p>
+		<p>💯100% increase on your investment,</p>
+		<p>
+		❌Defaulting to pay within 48hrs gets your account banned,</p>
+		<p>
+		🔄If a member linked to pay you defaults to make payment within 48hrs, the system automatically removes that member from your pay line and places that position for refill,</p>
+		<p>
+		👍🏾Low risk start-up of N10, 000.</p>
+    </div>
+</div>
+
+{% if not request.user.is_authenticated %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<span class="fa fa-sign-in fa-fw"></span> User Profile
+		</div>
+	    <div class="panel-body">
+	   		
+		   	<div class="panel panel-default col-md-4 col-md-offset-4" style="margin-top: 20px"> 
+				<div class="panel-heading"> Sign In</div>
+				<div class="panel-body">
+				  
+				 	<form role="form" method="post" action="{% url "account:login" %}">
+					    <fieldset>
+					        <div class="form-group">
+					            <input class="form-control" placeholder="Username" id="username" name="username" type="text" required autofocus>
+					        </div>
+					        <div class="form-group">
+					            <input class="form-control" placeholder="Password" id="password" name="password" type="password" value="" required>
+				            </div>
+
+				            {% csrf_token %}
+					        <input type="hidden" name="next" value="{{ next }}" />
+					        <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+
+					        <div class="row" style="text-align: center">
+					        	<a class="col-xs-12 " href="{% url "account:password_reset" %}"><i class="fa fa-unlock fa-fw"></i>Forgot Password?</a><a class="col-xs-12 " href="{% url "account:register" %}"><i class="fa fa-bookmark fa-fw"></i>Sign Up</a>
+				            </div>
+					    </fieldset>
+				 	</form>
+
+				</div>
+			</div>
+
+	    </div>
+	</div>
+{% endif %}
+
+{% endblock %}
+

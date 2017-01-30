@@ -1,0 +1,211 @@
+{% extends "account/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}ProtonPayer - Home{% endblock %}
+
+{% block nav_bar %}
+  <!-- Navbar -->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="{% url "account:home" %}">ProtonPayer</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+
+        <!-- Navbar left -->
+        <ul class="nav navbar-nav nav-custom-left">
+          <li><a href="{% url "account:home" %}">Home</a></li>
+          <li><a href="{% url "account:home" %}#howitworks">How It Works</a></li>
+          <li><a href="{% url "account:home" %}#packages">Packages</a></li>
+          <li><a href="{% url "account:home" %}#contact">Contact Us</a></li>
+        </ul>
+
+        <!-- Navbar right -->
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url "account:register" %}"><span class="fa fa-user fa-fw"></span> Sign Up</a></li>
+            <li><a href="{% url "account:login" %}"><span class="fa fa-sign-in fa-fw"></span> Login</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block content %}
+  <!-- First Container -->
+  <div class="container-fluid bg-1 text-center" style="color: black; background-image: url({% static 'img/money_logo_1.jpg' %});">
+    <h3 class="margin"><b>Get 100% Percent of your initial investment </br> In less than 10 days On ProtonPayer <br> Without Refering Anybody</b></h3>
+    <!--<img src="{% static "img/money_logo_1.jpg" %}" class="img-responsive" style="display:inline" alt="ProtonPayer" width="350" height="350">-->
+    <a href="{% url "account:register" %}" class="btn btn-default btn-lg">
+      <span class="fa fa-bookmark fa-fw"></span> SignUp
+    </a>
+  </div>
+
+  <!-- Second Container -->
+  <div class="container-fluid bg-2 text-center" id="howitworks">
+    <h3 class="margin">How it works</h3>
+    <p>After SignUp The Proton System Automatically Assigns An Upline For You To donate the sum of either <b>₦5,000</b>, <b>₦10,000</b>, <b>₦15,000</b>, <b>₦20,000</b>, <b>₦50,000</b>, <b>₦100,000</b>, <b>₦200,000</b>, <b>₦500,000</b> After your donation has been confirmed the Proton system will automatically assign 2 other registered people under you who will also pay you your joining amount each, into your bank account, making 100% (i.e. 100% of <b>₦5,000</b> is <b>₦10,000</b>, 100% of <b>₦10,000</b> is <b>₦20,000</b>, 100% of <b>₦15,000</b> is <b>₦30,000</b>, 100% of <b>₦20,000</b> is <b>₦40,000</b>, 100% of <b>₦50,000</b> is <b>₦100,000</b>, 100% of <b>₦100,000</b> is <b>₦200,000</b>, 100% of <b>₦200,000</b> is <b>₦400,000</b>, 100% of <b>₦500,000</b> is <b>₦1,000,000</b>). </p>
+    <a href="{% url "account:register" %}" class="btn btn-default btn-lg">
+      <span class="fa fa-bookmark fa-fw"></span> SignUp
+    </a>
+  </div>
+
+  <!-- Third Container (Grid) -->
+  <div class="container-fluid bg-3 text-center" id="packages">    
+    <h3 class="margin">Packages We Offer</h3><br>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                                    <article class="pricing-column col-lg-3 col-md-3">
+                    <div class="inner-box">
+                        <div class="plan-header text-center">
+                            <h3 class="plan-title">Alpha Package</h3>
+                            <h4 class="plan-info">You Pay</h4>
+                            <h2 class="plan-price">₦ 5,000</h2>
+                            <h4 class="plan-info">You Earn</h4>
+                            <h2 class="plan-price">₦ 10,000</h2>
+                        </div>
+                        <div class="text-center">
+                            <a href="{% url "account:register" %}"  class="btn btn-sm btn-custom">
+                                Register
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                                    <article class="pricing-column col-lg-3 col-md-3">
+                    <div class="inner-box">
+                        <div class="plan-header text-center">
+                            <h3 class="plan-title">Beta Package</h3>
+                            <h4 class="plan-info">You Pay</h4>
+                            <h2 class="plan-price">₦ 10,000</h2>
+                            <h4 class="plan-info">You Earn</h4>
+                            <h2 class="plan-price">₦ 20,000</h2>
+                        </div>
+                        <div class="text-center">
+                            <a href="{% url "account:register" %}"  class="btn btn-sm btn-custom">
+                                Register
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                                    <article class="pricing-column col-lg-3 col-md-3">
+                    <div class="inner-box">
+                        <div class="plan-header text-center">
+                            <h3 class="plan-title">Gamma Package</h3>
+                            <h4 class="plan-info">You Pay</h4>
+                            <h2 class="plan-price">₦ 15,000</h2>
+                            <h4 class="plan-info">You Earn</h4>
+                            <h2 class="plan-price">₦ 30,000</h2>
+                        </div>
+                        <div class="text-center">
+                            <a href="{% url "account:register" %}"  class="btn btn-sm btn-custom">
+                                Register
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                                    <article class="pricing-column col-lg-3 col-md-3">
+                    <div class="inner-box">
+                        <div class="plan-header text-center">
+                            <h3 class="plan-title">Delta Package</h3>
+                            <h4 class="plan-info">You Pay</h4>
+                            <h2 class="plan-price">₦ 20,000</h2>
+                            <h4 class="plan-info">You Earn</h4>
+                            <h2 class="plan-price">₦ 40,000</h2>
+                        </div>
+                        <div class="text-center">
+                            <a href="{% url "account:register" %}"  class="btn btn-sm btn-custom">
+                                Register
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                                    <article class="pricing-column col-lg-3 col-md-3">
+                    <div class="inner-box">
+                        <div class="plan-header text-center">
+                            <h3 class="plan-title">Sigma Package</h3>
+                            <h4 class="plan-info">You Pay</h4>
+                            <h2 class="plan-price">₦ 50,000</h2>
+                            <h4 class="plan-info">You Earn</h4>
+                            <h2 class="plan-price">₦ 100,000</h2>
+                        </div>
+                        <div class="text-center">
+                            <a href="{% url "account:register" %}"  class="btn btn-sm btn-custom">
+                                Register
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                                    <article class="pricing-column col-lg-3 col-md-3">
+                    <div class="inner-box">
+                        <div class="plan-header text-center">
+                            <h3 class="plan-title">Theta Package</h3>
+                            <h4 class="plan-info">You Pay</h4>
+                            <h2 class="plan-price">₦ 100,000</h2>
+                            <h4 class="plan-info">You Earn</h4>
+                            <h2 class="plan-price">₦ 200,000</h2>
+                        </div>
+                        <div class="text-center">
+                            <a href="{% url "account:register" %}"  class="btn btn-sm btn-custom">
+                                Register
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                                    <article class="pricing-column col-lg-3 col-md-3">
+                    <div class="inner-box">
+                        <div class="plan-header text-center">
+                            <h3 class="plan-title">Lambda Package</h3>
+                            <h4 class="plan-info">You Pay</h4>
+                            <h2 class="plan-price">₦ 200,000</h2>
+                            <h4 class="plan-info">You Earn</h4>
+                            <h2 class="plan-price">₦ 400,000</h2>
+                        </div>
+                        <div class="text-center">
+                            <a href="{% url "account:register" %}"  class="btn btn-sm btn-custom">
+                                Register
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                                    <article class="pricing-column col-lg-3 col-md-3">
+                    <div class="inner-box">
+                        <div class="plan-header text-center">
+                            <h3 class="plan-title">Omega Package</h3>
+                            <h4 class="plan-info">You Pay</h4>
+                            <h2 class="plan-price">₦ 500,000</h2>
+                            <h4 class="plan-info">You Earn</h4>
+                            <h2 class="plan-price">₦ 1,000,000</h2>
+                        </div>
+                        <div class="text-center">
+                            <a href="{% url "account:register" %}"  class="btn btn-sm btn-custom">
+                                Register
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+            </div>
+        </div><!-- end col -->
+    </div>
+    <!-- end row -->
+  </div>
+{% endblock %}
+
+{% block footer%}
+  <!-- Footer -->
+  <footer class="container-fluid bg-4 text-center" id="contact">
+    <h2 class="text-center">CONTACT</h2>
+    <div class="row">
+      <div class="text-center">
+        <p>Contact us and we'll get back to you within 24 hours. </p><a href="mailto:ProtonPayer@protonmail.com"><span class="glyphicon glyphicon-envelope"></span> ProtonPayer@protonmail.com </a></p>
+      </div>
+  </footer>
+{% endblock %}

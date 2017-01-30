@@ -1,0 +1,442 @@
+{% extends "account/base.html" %}
+
+{% block title %}ProtonPayer - Transactions{% endblock %}
+
+{% block nav_bar %}
+	{% if request.user.is_authenticated %}
+		<!-- Navbar -->
+		<nav class="navbar navbar-default">
+		<div class="container">
+		  <div class="navbar-header">
+		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>                        
+		    </button>
+		    <a class="navbar-brand" href="{% url "account:home" %}">ProtonPayer</a>
+		  </div>
+
+		  	<div class="collapse navbar-collapse" id="myNavbar">
+
+		  	<!-- Navbar left -->
+	        <ul class="nav navbar-nav nav-custom-left">
+	          <li><a href="{% url "account:home" %}">Home</a></li>
+	          <li><a href="{% url "account:dashboard" %}">Dashboard</a></li>
+	          <li><a href="{% url "account:transactions" %}">Transactions</a></li>
+	        </ul>
+	        
+	        <ul class="nav navbar-nav navbar-top-links navbar-right" style="padding-left: 0px; margin-left: 0px;">
+                <li class="dropdown" style="padding-left: 0px; margin-left: 0px;">
+                    <a href="mailto:ProtonPayer@protonmail.com" style="padding-left: 0px; margin-left: 0px;"><span class="fa fa-envelope fa-fw"></span> Support</a>
+                </li>
+                <li class="dropdown">
+			        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-left: 0px; margin-left: 0px;"><span class="fa fa-user fa-fw"></span> {{ request.user }}<span class="caret"></span></a>
+			        <ul class="dropdown-menu">
+			        	{% if not request.user.profile.deactivated %}
+			        		<li><a href="{% url 'account:password_change' %}"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+			        		<li class="divider"></li>
+			        	{% endif %}
+			          <li><a href="{% url 'account:logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+			        </ul>
+			    </li>
+            </ul>
+
+	        </div>
+		</div>
+		</nav>
+	{% endif %}
+{% endblock %}
+
+{% block content %}	
+	<div class="panel-body">
+
+		{% if request.user.profile.package == "None" %}
+			<!-- Third Container (Grid) -->
+		<div class="container-fluid bg-3 text-center" id="packages">    
+		<h3 class="margin">Select your Package</h3>
+
+		<div class="alert alert-info" style="margin-bottom: 15px;">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Info!</strong> Select your package and pay within 12 hours else your account will be deleted.
+		</div>
+    
+		<div class="row">
+		    <div class="col-lg-12">
+		        <div class="row">
+		                                <article class="pricing-column col-lg-3 col-md-3">
+		                <div class="inner-box">
+		                    <div class="plan-header text-center">
+		                        <h3 class="plan-title">Alpha Package</h3>
+		                        <h4 class="plan-info">You Pay</h4>
+		                        <h2 class="plan-price">₦ 5,000</h2>
+		                        <h4 class="plan-info">You Earn</h4>
+		                        <h2 class="plan-price">₦ 10,000</h2>
+		                    </div>
+		                    <div class="text-center">
+		                    <form action="." method="post" role="form">
+		                            <input hidden name="amt" value="5k" />
+		                            {% csrf_token %}
+		                            <button type="submit" class="btn btn-sm btn-custom" role="button">
+		                            Select
+		                        	</button>
+		                    </form>
+		                    </div>
+		                </div>
+		            </article>
+		                                <article class="pricing-column col-lg-3 col-md-3">
+		                <div class="inner-box">
+		                    <div class="plan-header text-center">
+		                        <h3 class="plan-title">Beta Package</h3>
+		                        <h4 class="plan-info">You Pay</h4>
+		                        <h2 class="plan-price">₦ 10,000</h2>
+		                        <h4 class="plan-info">You Earn</h4>
+		                        <h2 class="plan-price">₦ 20,000</h2>
+		                    </div>
+		                    <div class="text-center">
+		                      <form action="." method="post" role="form">
+		                            <input hidden name="amt" value="10k" />
+		                            {% csrf_token %}
+		                            <button type="submit" class="btn btn-sm btn-custom" role="button">
+		                            Select
+		                        	</button>
+		                    </form>
+		                    </div>
+		                </div>
+		            </article>
+		                                <article class="pricing-column col-lg-3 col-md-3">
+		                <div class="inner-box">
+		                    <div class="plan-header text-center">
+		                        <h3 class="plan-title">Gamma Package</h3>
+		                        <h4 class="plan-info">You Pay</h4>
+		                        <h2 class="plan-price">₦ 15,000</h2>
+		                        <h4 class="plan-info">You Earn</h4>
+		                        <h2 class="plan-price">₦ 30,000</h2>
+		                    </div>
+		                    <div class="text-center">
+		                        <form action="." method="post" role="form">
+		                            <input hidden name="amt" value="15k" />
+		                            {% csrf_token %}
+		                            <button type="submit" class="btn btn-sm btn-custom" role="button">
+		                            Select
+		                        	</button>
+		                    </form>
+		                    </div>
+		                </div>
+		            </article>
+		                                <article class="pricing-column col-lg-3 col-md-3">
+		                <div class="inner-box">
+		                    <div class="plan-header text-center">
+		                        <h3 class="plan-title">Delta Package</h3>
+		                        <h4 class="plan-info">You Pay</h4>
+		                        <h2 class="plan-price">₦ 20,000</h2>
+		                        <h4 class="plan-info">You Earn</h4>
+		                        <h2 class="plan-price">₦ 40,000</h2>
+		                    </div>
+		                    <div class="text-center">
+		                        <form action="." method="post" role="form">
+		                            <input hidden name="amt" value="20k" />
+		                            {% csrf_token %}
+		                            <button type="submit" class="btn btn-sm btn-custom" role="button">
+		                            Select
+		                        	</button>
+		                    </form>
+		                </div>
+		            </article>
+		                                <article class="pricing-column col-lg-3 col-md-3">
+		                <div class="inner-box">
+		                    <div class="plan-header text-center">
+		                        <h3 class="plan-title">Sigma Package</h3>
+		                        <h4 class="plan-info">You Pay</h4>
+		                        <h2 class="plan-price">₦ 50,000</h2>
+		                        <h4 class="plan-info">You Earn</h4>
+		                        <h2 class="plan-price">₦ 100,000</h2>
+		                    </div>
+		                    <div class="text-center">
+		                        <form action="." method="post" role="form">
+		                            <input hidden name="amt" value="50k" />
+		                            {% csrf_token %}
+		                            <button type="submit" class="btn btn-sm btn-custom" role="button">
+		                            Select
+		                        	</button>
+		                    </form>
+		                    </div>
+		                </div>
+		            </article>
+		                                <article class="pricing-column col-lg-3 col-md-3">
+		                <div class="inner-box">
+		                    <div class="plan-header text-center">
+		                        <h3 class="plan-title">Theta Package</h3>
+		                        <h4 class="plan-info">You Pay</h4>
+		                        <h2 class="plan-price">₦ 100,000</h2>
+		                        <h4 class="plan-info">You Earn</h4>
+		                        <h2 class="plan-price">₦ 200,000</h2>
+		                    </div>
+		                    <div class="text-center">
+		                        <form action="." method="post" role="form">
+		                            <input hidden name="amt" value="100k" />
+		                            {% csrf_token %}
+		                            <button type="submit" class="btn btn-sm btn-custom" role="button">
+		                            Select
+		                        	</button>
+		                    </form>
+		                    </div>
+		                </div>
+		            </article>
+		                                <article class="pricing-column col-lg-3 col-md-3">
+		                <div class="inner-box">
+		                    <div class="plan-header text-center">
+		                        <h3 class="plan-title">Lambda Package</h3>
+		                        <h4 class="plan-info">You Pay</h4>
+		                        <h2 class="plan-price">₦ 200,000</h2>
+		                        <h4 class="plan-info">You Earn</h4>
+		                        <h2 class="plan-price">₦ 400,000</h2>
+		                    </div>
+		                    <div class="text-center">
+		                        <form action="." method="post" role="form">
+		                            <input hidden name="amt" value="200k" />
+		                            {% csrf_token %}
+		                            <button type="submit" class="btn btn-sm btn-custom" role="button">
+		                            Select
+		                        	</button>
+		                    </form>
+		                    </div>
+		                </div>
+		            </article>
+
+		                                <article class="pricing-column col-lg-3 col-md-3">
+		                <div class="inner-box">
+		                    <div class="plan-header text-center">
+		                        <h3 class="plan-title">Omega Package</h3>
+		                        <h4 class="plan-info">You Pay</h4>
+		                        <h2 class="plan-price">₦ 500,000</h2>
+		                        <h4 class="plan-info">You Earn</h4>
+		                        <h2 class="plan-price">₦ 1,000,000</h2>
+		                    </div>
+		                    <div class="text-center">
+		                        <form action="." method="post" role="form">
+		                            <input hidden name="amt" value="500k" />
+		                            {% csrf_token %}
+		                            <button type="submit" class="btn btn-sm btn-custom" role="button">
+		                            Select
+		                        	</button>
+		                    </form>
+		                    </div>
+		                </div>
+		            </article>
+		            
+		        </div>
+		    </div><!-- end col -->
+		</div>
+		<!-- end row -->
+	    {% elif request.user.profile.matched and not request.user.profile.PHed %}
+	    <div class="container text-center" style="color: black;">
+        	<div class="row m-t-20"> <div class="col-md-6 col-md-offset-3">
+        	<div class="panel panel-success"> 
+        	<div class="panel-heading">
+	        	<h4>Match Found!!!</h4> </div>
+	        	<div class="panel-body">
+		            <div class="inner-box">
+
+
+		                <div style="padding-left: 10px;">
+		            <!--Use PHP to decide which block to show-->
+		                <div >
+		                    <div class="timeline-panel">
+		                        <div class="timeline-heading">
+		                            <h4 class="timeline-title">Pay ₦{{ request.user.profile.package|slice:":-1" }},000 to {{ GH_user }}</h4>
+		                            <p><small class="text-muted"><i class="fa fa-clock-o"></i> Since {{ PH_user.PH_time|date:"F t, Y H:i A" }} <br /> Time left: <span id="countdown"></span></small>
+		                            </p>
+		                            
+		                <script>
+		                    var initialTime = {{ init_time }} ;//Place here the total of seconds you receive on your PHP code. ie: var initialTime = ;
+
+		                    var seconds = initialTime;
+		                    function timer() {
+		                        var days        = Math.floor(seconds/(24*3600)/60/60);
+		                        var hoursLeft   = Math.floor((seconds) - (days*86400));
+		                        //var hoursLeft   = Math.floor(seconds/60);
+		                        var hours       = Math.floor(hoursLeft/3600);
+		                        var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+		                        var minutes     = Math.floor(minutesLeft/60);
+		                        var remainingSeconds = seconds % 60;
+		                        if (remainingSeconds < 10) {
+		                            remainingSeconds = "0" + remainingSeconds; 
+		                        }
+		                        //document.getElementById('countdown').innerHTML = days + "d " + hours + "hrs " + minutes + "min " + remainingSeconds+ "sec";
+		                        document.getElementById('countdown').innerHTML = hours + "hrs " + minutes + "min " + remainingSeconds+ "sec";
+		                        if (seconds == 0) {
+		                            clearInterval(countdownTimer);
+		                            document.getElementById('countdown').innerHTML = "Refresh your browser to see the correct time";
+		                        } else {
+		                            seconds--;
+		                        }
+		                    }
+		                    var countdownTimer = setInterval('timer()', 1000);
+		                </script>
+	                        </div>
+	                        <div class="timeline-body">
+	                            <small>
+	                                <ul class="nav in" id="side-menu">
+	                                
+	                                    <li>
+	                                        <b><i class="fa fa-phone fa-fw"></i> Phone:</b> {{ GH_profile.phone }}                                            </li>
+	                                    <li>
+	                                        <b><i class="fa fa-bank fa-fw"></i> Bank:</b> {{ GH_profile.bank }}                                            </li>
+	                                    <li>
+	                                        <b><i class="fa fa-external-link fa-fw"></i> Acct. No.:</b> {{ GH_profile.account_number }}                                            </li>
+	                                    <li>
+	                                        <b><i class="fa fa-user fa-fw"></i> Ben. Name:</b> {{ GH_profile.surname|title }} {{ GH_profile.first_name|title }}                                            </li>
+	                                </ul>
+	                            </small>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+
+
+	            </div>			  
+			</div> </div> </div> </div> </div>     </div>    	
+
+        {% elif request.user.profile.matched and request.user.profile.PHed %}
+       		
+       		{% if not request.user.profile.downliner.all %}
+
+	       		<div class="container" style="color: black;">
+	        	<div class="row m-t-20"> <div class="col-md-6 col-md-offset-3">
+	        	<div class="panel panel-success"> 
+	        	<div class="panel-heading text-center">
+	        	<h4>{{ request.user.profile.no_of_paid }}/2 Person{{ request.user.profile.no_of_paid|pluralize }} Has Paid ₦{{ request.user.profile.package|slice:":-1" }},000</h4> </div>
+	        	<div class="panel-body">
+		            <div class="inner-box">
+		            	<div>
+	                        <div class="well well-lg">
+	                            <div class="panel-yellow panel-heading">
+	                                <i class="fa fa-thumb-tack fa-fw"></i><b></b> Pending Fill...<br />
+	                            </div>
+	                            <hr>
+	                            <h4><i class="fa fa-user fa-fw"></i>None Yet</h4>
+	                        </div>
+	                    </div>
+	                </div>  
+				</div> </div> </div> </div> </div>     </div>
+
+			{% else %}
+
+			<div class="container text-center" style="color: black;">
+	        	<div class="row m-t-20"> <div class="col-md-6 col-md-offset-3">
+	        	<div class="panel panel-success"> 
+	        	<div class="panel-heading">
+	        	<h4>{{ request.user.profile.no_of_paid }}/2 Person{{ request.user.profile.no_of_paid|pluralize }} Has Paid ₦{{ request.user.profile.package|slice:":-1" }},000</h4> </div>
+	        	<div class="panel-body">          
+	            	{% for them in PHer_profile_list %}
+			            			 <div style="padding-left: 10px;">
+				            <!--Use PHP to decide which block to show-->
+				                <div >
+				                    <div class="timeline-panel">
+				                        <div class="timeline-heading">
+				                            <h4 class="timeline-title"><b><i class="fa fa-user fa-fw"></i> Username:</b> {{ them.user }}</h4>
+				                            <p><small class="text-muted"><i class="fa fa-clock-o"></i> Since {{ them.PH_time|date:"F t, Y H:i A" }} <br /> Time left: <span id='{{ them.user }}'></span></small>
+				                            </p>
+				                            
+				                <script>
+				                    var initialTime = {{ them.init_time }} ;//Place here the total of seconds you receive on your PHP code. ie: var initialTime = ;
+
+				                    var seconds = initialTime;
+				                    function {{ them.user }}time() {
+				                        var days        = Math.floor(seconds/(24*3600)/60/60);
+				                        var hoursLeft   = Math.floor((seconds) - (days*86400));
+				                        //var hoursLeft   = Math.floor(seconds/60);
+				                        var hours       = Math.floor(hoursLeft/3600);
+				                        var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+				                        var minutes     = Math.floor(minutesLeft/60);
+				                        var remainingSeconds = seconds % 60;
+				                        if (remainingSeconds < 10) {
+				                            remainingSeconds = "0" + remainingSeconds; 
+				                        }
+				                        //document.getElementById('countdown').innerHTML = days + "d " + hours + "hrs " + minutes + "min " + remainingSeconds+ "sec";
+				                        document.getElementById('{{ them.user }}').innerHTML = hours + "hrs " + minutes + "min " + remainingSeconds+ "sec";
+				                        if (seconds == 0) {
+				                            clearInterval({{ them.user }}countdownTimer);
+				                            document.getElementById('{{ them.user }}').innerHTML = "Refresh your browser to see the correct time";
+				                        } else {
+				                            seconds--;
+				                        }
+				                    }
+				                    var {{ them.user }}countdownTimer = setInterval('{{ them.user }}time()', 1000);
+				                </script>
+			                        </div>
+			                        <div class="timeline-body">
+			                            <small>
+			                                <ul class="nav in" id="side-menu">
+			                                
+			                                    <li>
+			                                        <b><i class="fa fa-phone fa-fw"></i> Phone:</b> {{ them.phone }}                                            </li>
+			                                    <li>
+			                                        <b><i class="fa fa-bank fa-fw"></i> Bank:</b> {{ them.bank }}                                            </li>
+			                                    <li>
+			                                        <b><i class="fa fa-external-link fa-fw"></i> Acct. No.:</b> {{ them.account_number }}                                            </li>
+			                                    <li>
+			                                        <b><i class="fa fa-user fa-fw"></i> Ben. Name:</b> {{ them.surname|title }} {{ them.first_name|title }}                                            </li>
+			                                </ul>
+			                            </small>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			            <div class="text-center">
+		                        <form action="." method="post" role="form">
+		                            <input hidden name="user" value={{ them.user }}  />
+		                            {% csrf_token %}
+		                            <button type="submit" class="btn btn-sm btn-custom" role="button">
+		                            Confirm Payment
+		                        	</button>
+		                    </form>
+		                    </div>
+                        	
+                        	{% if not forloop.last %}<hr>{% endif %}
+		            {% endfor %}
+	                </div>  
+				</div> </div> </div> </div> </div>     </div>
+			{% endif %}
+
+        {% else %}
+        	<div class="container" style="color: black;">
+        	<div class="row m-t-20"> <div class="col-md-6 col-md-offset-3">
+        	<div class="panel panel-success"> 
+        	<div class="panel-heading text-center">
+        	<h4>Match Pending...</h4> </div>
+        	<div class="panel-body">
+	            <div class="inner-box">
+	                <div class="plan-header text-center">
+	                    <h3 class="plan-title">Your Selected Package</h3>
+	                    <h4 class="plan-info">You Pay</h4>
+	                    <h2 class="plan-price">₦ {{ request.user.profile.package|slice:":-1" }},000</h2>
+	                    <h4 class="plan-info">You Earn</h4>
+	                    <h2 class="plan-price">Double</h2>
+	                </div>
+	            </div>			  
+			</div> </div> </div> </div> </div>     </div>
+		{% endif %}
+
+    </div>
+    <!-- /.panel-body -->
+
+{% endblock %}
+
+
+{% block footer%}
+  <!-- FOOTER -->
+  <footer class="section">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="footer-alt text-center">
+                      <p class="text-muted m-b-0">2017 © Copyright of ProtonPayer</p>
+                  </div>
+              </div>
+          </div> <!-- end row -->
+
+      </div> <!-- end container -->
+  </footer>
+  <!-- END FOOTER -->
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "account/base.html" %}
+
+{% block title %}ProtonPayer - Feedback{% endblock %}
+
+{% block nav_bar %}
+	{% if not request.user.is_authenticated %}
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>                        
+		      </button>
+		      <a class="navbar-brand" href="{% url "account:home" %}">Proton Payer</a>
+		    </div>
+
+		    <ul class="nav navbar-top-links navbar-left" style="padding-left: 0px; margin-left: 0px;">
+                <li class="dropdown home" style="padding-left: 0px; margin-left: 0px;">
+                    <a href="feedback.php" style="padding-left: 0px; margin-left: 0px;"><span class="fa fa-envelope fa-fw"></span> Send FeedBack</a>
+                </li>
+            </ul>
+
+		    <div class="collapse navbar-collapse" id="myNavbar">
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="{% url "account:register" %}"><span class="fa fa-user fa-fw"></span> Sign Up</a></li>
+		        <li><a href="{% url "account:login" %}"><span class="fa fa-sign-in fa-fw"></span> Login</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		</nav>
+	{% else %}
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>                        
+		      </button>
+		      <a class="navbar-brand" href="{% url "account:home" %}">Proton Payer</a>
+		    </div>
+
+		    <ul class="nav navbar-top-links navbar-left" style="padding-left: 0px; margin-left: 0px;">
+                <li class="dropdown home" style="padding-left: 0px; margin-left: 0px;">
+                    <a href="{% url 'account:feedback' %}" style="padding-left: 0px; margin-left: 0px;"><span class="fa fa-envelope fa-fw"></span> Send FeedBack</a>
+                </li>
+                <li class="dropdown home">
+			        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-left: 0px; margin-left: 0px;"><span class="fa fa-user fa-fw"></span> {{ request.user }}<span class="caret"></span></a>
+			        <ul class="dropdown-menu navbar-top-links">
+			          <li><a href="{% url 'account:profile' %}"><i class="fa fa-user fa-fw"></i> My Profile</a></li>
+			          <li><a href="{% url 'account:password_change' %}"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+			          <li class="divider"></li>
+			          <li><a href="{% url 'account:logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+			        </ul>
+			    </li>
+            </ul>
+
+		    <div class="collapse navbar-collapse" id="myNavbar">
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="{% url "account:dashboard" %}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+		        <li><a href="{% url "account:login" %}"><i class="fa fa-upload fa-fw"></i> Send Cash</a></li>
+		        <li><a href="{% url "account:register" %}"><i class="fa fa-download fa-fw"></i> Recieve Cash</a></li>
+		        <li><a href="{% url "account:login" %}"><i class="fa fa-history fa-fw"></i> Account Summary</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		</nav>
+	{% endif %}
+{% endblock %}
+
+
+{% block content %}
+	{% if sent %}
+		<h1>Message successfully sent</h1>
+		<div class="alert alert-success">
+			<strong>Success!</strong> Your message have been successfully sent to us.
+		</div>
+	{% else %}
+		<div class="col-sm-12" style="margin-bottom: 10px;">
+	        <h1>Send us feedback</h1>
+	        <p><small>Enter your e-mail address and message below.</small></p>
+	    </div>
+		
+		<form action="." method="post" class="col-sm-4 col-xs-12 form-register" style="margin-top: 10px;" name="registration">
+		<fieldset>
+			<div class="form-group">
+				<label>Email:</label>
+	        	<input class="form-control" placeholder="Email" name="email" type="text" required autofocus>
+	    	</div>
+	    	<div class="form-group">
+				<label>Short Description of FeedBack:</label>
+	        	<input class="form-control" placeholder="Why are you sending this feedback." name="subject" type="text" required autofocus>
+	    	</div>
+	    	<div class="form-group">
+				<label>Message:</label>
+				<textarea class="form-control" placeholder="Your Message." id="message" name="message" required></textarea>
+			</div>
+
+			{% csrf_token %}
+			<input type='submit' value='Submit' class='submit' />
+		</fieldset>
+		</form>
+	{% endif %}
+{% endblock %}
+
