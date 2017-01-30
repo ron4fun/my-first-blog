@@ -16,7 +16,7 @@ from django.utils import timezone
 #import win32api
 
 EMAIL_HOST_USER = 'ron2tele@gmail.com'
-TOTAL_PH_TIME = .1 # It is in hours
+TOTAL_PH_TIME = 12 # It is in hours
 
 # for validation
 def startsWithNumber(value):
