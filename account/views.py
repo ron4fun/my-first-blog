@@ -13,7 +13,7 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.utils import timezone
 
-import win32api
+#import win32api
 
 EMAIL_HOST_USER = 'ron2tele@gmail.com'
 TOTAL_PH_TIME = .1 # It is in hours
